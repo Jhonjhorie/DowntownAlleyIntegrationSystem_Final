@@ -1,11 +1,5 @@
 ﻿
-@{
-    ViewBag.User = "PaulTan";
-    ViewBag.Itemname = "Shirt";
-    ViewBag.Price = "50.00";
-    ViewBag.Bill = "93.00";
-    Layout = null;
-}
+@model Tuple < IEnumerable<SelectListItem>, IEnumerable<SelectListItem>, IEnumerable < SelectListItem>>
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +12,9 @@
 
 </head>
 <body>
+
+
+
     <div class="navbar navbar-inverse navbar-fixed-top p-0">
         <div class="container-fluid bg-dark text-white py-2 px-5 m-0">
             <h3 class="col">Point of Sale System</h3>
@@ -26,101 +23,227 @@
                 <span id="date">@DateTime.Now.ToString("MMMM, dd yyyy")</span>
                 <span id="time" style="margin-left: 20px;">@DateTime.Now.ToString("HH:mm:ss tt")</span>
             </h2>
-            <h3 class="col text-end ">  @ViewBag.User <i class="bi bi-person-circle" style="color:white;"></i></h3>
+            <h3 class="col text-end ">  Paultan <i class="bi bi-person-circle" style="color:white;"></i></h3>
         </div>
     </div>
 
 
-    <div class="container-fluid body-content min-vh-100 p-5" style="margin-top:-62.5px; background-color: #ccc">
-        <main class="container-fluid pt-4 row">
-            <div class="col p-0  me-4">
-                <div class="row border border-black my-2 ">
-                    <div class="col-8">
-                        <div class="d-flex p-3 w-100" style="margin: auto 0;">
-                            <p style="margin: auto 0">Search Product: </p>
-                            <input type="text" name="SearchID" value="" style="margin:0 10px;" />
-                            <input type="button" class="btn btn-success" name="SearchBtn" value="Search" />
-                        </div>
-                    </div>
-                    <div class="col p-0 mx-4">
-                        <div class="d-flex justify-content-evenly"><p>Name: </p> <p>@ViewBag.Itemname</p> </div> <br />
 
-                        <div class="d-flex justify-content-evenly"><p class="m-0">Price: </p> <p class=" m-0">@ViewBag.Price</p> </div>
-                    </div>
-                </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateDateTime() {
+            const dateElement = document.getElementById("date");
+            const timeElement = document.getElementById("time");
 
-                <div class="row" style="height:80%;">
-                    <table border="1">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+            const currentTime = new Date();
+            dateElement.textContent = currentTime.toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            timeElement.textContent = currentTime.toLocaleTimeString();
+        }
+
+        updateDateTime();
+
+        setInterval(updateDateTime, 1000);
+
+
+    </script>
+
+
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Product').val(0);
+            $("#Product").change(function () {
+                var ProductID = $('#Product').val();
+                GetUnitPrice(ProductID);
+            });
+
+            $("input[type=text]").change(function () {
+                CalculateSubTotal()
+            });
+
+            $("#btnAddtoOrder").click(function () {
+                AddItemtoList()
+            });
+
+
+            $("#btnCancelOrder").click(function () {
+                ResetItem()
+            });
+        });
+
+        
+
+
+        function RemoveItem(itemID) {
+            $(itemID).closest('tr').remove();
+        }
+
+
+        function AddItemtoList() {
+            var tblItemList = $("#tblOrder");
+            var price = $("#unitprice").val();
+            var quantity = $("#txtQuantity").val();
+            var discount = $("#txtDiscount").val();
+            var productid = $("#Product").val();
+            var productname = $("#Product option:selected").text();
+
+            var total = (price * quantity) - discount;
+
+            var itemlist = "<tr> <td hidden>" +
+                productid +
+                "</td> <td>" +
+                productname +
+                "</td> <td>" +
+                parseFloat(price).toFixed(2) +
+                "</td> <td>" +
+                parseFloat(quantity).toFixed(2) +
+                "</td> <td>" +
+                parseFloat(discount).toFixed(2) +
+                "</td> <td>" +
+                parseFloat(total).toFixed(2) +
+                "</td> <td>     <input type='button' value='Remove' name='remove' class='btn btn-danger'  onclick='RemoveItem(this)' /> </tr> </tr>";
+
+            tblItemList.append(itemlist);
+            FinalOrderTotal()
+            ResetItem();
+        }
+
+
+        function FinalOrderTotal() {
+            $("#FinalSubTotal").val("0.00");
+            var FinalTotal = 0.00;
+            $("#tblOrder").find("tr:gt(0)").each(function () {
+                var Total = parseFloat($(this).find("td:eq(5)").text());
+                FinalTotal += Total;
+            });
+
+            $("#FinalSubTotal").val(parseFloat(FinalTotal).toFixed(2));
+        }
+
+        function ResetItem() {
+            $("#unitprice").val('');
+            $("#txtQuantity").val('');
+            $("#txtDiscount").val('0.00');
+            $("#Product").val(0);
+            $("#subtotal").val('');
+        }
+
+        function CalculateSubTotal() {
+            var price = $("#unitprice").val();
+            var quantity = $("#txtQuantity").val();
+            var discount = $("#txtDiscount").val();
+
+            var total = (price * quantity) - discount;
+
+            $("#subtotal").val(parseFloat(total).toFixed(2))
+        }
+
+        function GetUnitPrice(ProductID) {
+            $.ajax({
+                async: true,
+                type: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: { ProductID: ProductID },
+                url: '/POS/getItemUnitPrice',
+                success: function (data) {
+                    $("#unitprice").val(parseFloat(data).toFixed(2));
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error: " + status, error);
+                    alert("There is some problem getting the Unit Price. Check the console for details.");
+                }
+
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid bg-body body-content min-vh-100 p-5" style="margin-top:-62.5px; background-color: #ccc">
+
+        <main class="container-fluid pt-4 gap-2 row">
+
+
+
+            <div class="col">
+
+                <div style="height:80%;">
+                    <table id="tblOrder" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th hidden>Product ID</th>
+                                <th>Product Code</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Discount</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
+
             </div>
 
 
 
-            <div class="col-4 p-2 ">
-                <div class="row p-3 mb-2 border border-black">
+            <div class="col-4 ">
+                <div class="form-group border border-1 bg-body-secondary border-black p-2">
+                    Search Product:
+                    @Html.DropDownList("Product", new SelectList(Model.Item1, "Value", "Text"),
+                                new { @class = "form-control" })
 
-                    <h5 class="m-0">Product Code: </h5>
-                    <input type="text" name="PCode" value="" />
+                    Price:
+                    <input type="text" readonly="readonly" name="productprice" value="" id="unitprice" class="form-control" />
 
-                    <h5 style="margin: 0;">Quantity: </h5>
-                    <input type="text" name="Quantity" value="" />
+                    Quantity:
+                    <input type="text" name="Quantity" value="0" id="txtQuantity" class="form-control" />
 
-                    <h5 style="margin: 0;">Discount:</h5>
-                    <input type="text" name="Discount" value="" />
+                    Discount:
+                    <input type="text" name="Discount" value="0.00" id="txtDiscount" class="form-control" />
 
-                    <div class="d-flex justify-content-center">
-                        <input type="button" class="btn btn-primary" name="AddToCart" value="Add to cart" />
-                        <input type="button" class="btn btn-danger" name="Cancel" value="Cancel" />
+                    Subtotal:
+                    <input type="text" name="subtotal" value="0.00" id="subtotal" class="form-control" />
+
+
+                    
+                    <div class="d-flex justify-content-center gap-1">
+                        <input type="button" class="btn btn-primary" id="btnAddtoOrder" value="Add to order" />
+                        <input type="button" class="btn btn-danger" id="btnCancelOrder" value="Cancel" />
                     </div>
                 </div>
 
 
+                
+                <div class="form-group border border-1 bg-body-secondary border-black p-2 my-3">
+                    Sub Total:
+                    <input type="text" name="FinalSubTotal" id="FinalSubTotal" value="0.00" class="form-control" readonly="readonly" />
+                    Vat:
+                    <input type="text" name="vat" value="0.00" class="form-control" readonly="readonly" />
 
-                <div class="row p-2 mb-2 border border-black ">
-                    <div class="row">
-                        <div class="col">Sub Total: </div>
-                        <div class="col">100.00</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">Discout: </div>
-                        <div class="col">10.00</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">Vat:</div>
-                        <div class="col">3.00</div>
-                    </div>
                     <h5 class="text-center">Total Bill: @ViewBag.Bill</h5>
                 </div>
 
-                <div class="row p-3 mb-2 border border-black justify-content-center">
+
+                <div class="form-group border border-1 bg-body-secondary border-black p-2 ">
                     <div class="row">
                         <div class="col">
-                            <h4>Customer's Money:</h4>
+                            <h4>Amount tendered:</h4>
                             <input type="text" name="CustomerMoney" value="" />
                         </div>
                         <div class="col">
@@ -140,26 +263,11 @@
     <input type="button" name="name" value="Logout" class="btn-dark" style="position: absolute; bottom:0; left:0;" />
 
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <script>
-        function updateDateTime() {
-            const dateElement = document.getElementById("date");
-            const timeElement = document.getElementById("time");
 
-            const currentTime = new Date();
-            dateElement.textContent = currentTime.toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            timeElement.textContent = currentTime.toLocaleTimeString();
-        }
 
-        updateDateTime();
-
-        setInterval(updateDateTime, 1000);
-    </script>
 
 
 </body>

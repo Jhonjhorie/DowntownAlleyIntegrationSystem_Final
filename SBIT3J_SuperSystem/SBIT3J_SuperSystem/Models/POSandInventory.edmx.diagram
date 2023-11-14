@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3b62b1bcdb64e9ea237e303d059d507" Name="Diagram1">
+        <EntityTypeShape EntityType="SBIT3JModel.Category" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.Discount" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.LogAuditTrail" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.Product" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.Restock" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.RestockDetail" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.ReturnsRefund" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.SalesTransaction" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.SalesTransactionDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBIT3JModel.User" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="SBIT3JModel.FK__Product__Categor__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__SalesTran__Disco__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__LogAuditT__UserI__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__RestockDe__Produ__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__ReturnsRe__Produ__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__SalesTran__Produ__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__Restock__UserID__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__RestockDe__Resto__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__ReturnsRe__Trans__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__SalesTran__Cashi__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="SBIT3JModel.FK__SalesTran__Trans__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

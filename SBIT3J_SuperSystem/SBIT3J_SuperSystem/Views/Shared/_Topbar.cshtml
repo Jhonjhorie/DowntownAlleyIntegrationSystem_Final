@@ -1,0 +1,37 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top p-0">
+    <div class="container-fluid bg-dark text-white py-2 px-5 m-0">
+        <h3 class="col">Point of Sale System</h3>
+
+        <h2 id="dateTime" class="text-center col-5">
+            <span id="date">@DateTime.Now.ToString("MMMM, dd yyyy")</span>
+            <span id="time" style="margin-left: 20px;">@DateTime.Now.ToString("HH:mm:ss tt")</span>
+        </h2>
+        <h3 class="col text-end ">  Paultan <i class="bi bi-person-circle" style="color:white;"></i></h3>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateDateTime() {
+        const dateElement = document.getElementById("date");
+        const timeElement = document.getElementById("time");
+
+        const currentTime = new Date();
+        dateElement.textContent = currentTime.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        timeElement.textContent = currentTime.toLocaleTimeString();
+    }
+
+    updateDateTime();
+
+    setInterval(updateDateTime, 1000);
+
+
+</script>

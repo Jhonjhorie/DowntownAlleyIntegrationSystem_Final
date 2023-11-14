@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SBIT3JModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="DiscountID" />
+    </Key>
+    <Property Name="DiscountID" Type="int" Nullable="false" />
+    <Property Name="DiscountName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="DiscountType" Type="nvarchar" MaxLength="20" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="LogAuditTrail">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="Size" Type="nvarchar" MaxLength="10" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="StockLevel" Type="int" />
+    <Property Name="Archived" Type="bit" />
+  </EntityType>
+  <EntityType Name="Restock">
+    <Key>
+      <PropertyRef Name="RestockID" />
+    </Key>
+    <Property Name="RestockID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="RestockDetails">
+    <Key>
+      <PropertyRef Name="RestockDetailID" />
+    </Key>
+    <Property Name="RestockDetailID" Type="int" Nullable="false" />
+    <Property Name="RestockID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="QuantityAdded" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="ReturnsRefund">
+    <Key>
+      <PropertyRef Name="ReturnID" />
+    </Key>
+    <Property Name="ReturnID" Type="int" Nullable="false" />
+    <Property Name="TransactionID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="ReturnDate" Type="datetime" />
+    <Property Name="QuantityReturned" Type="int" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+    <Property Name="Resellable" Type="bit" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SalesTransaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="int" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="CashierUserID" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ReceiptInfo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SalesTransactionDetails">
+    <Key>
+      <PropertyRef Name="TransactionDetailID" />
+    </Key>
+    <Property Name="TransactionDetailID" Type="int" Nullable="false" />
+    <Property Name="TransactionID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="QuantitySold" Type="int" />
+    <Property Name="PricePerUnit" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Subtotal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="DiscountID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__LogAuditT__UserI__52593CB8">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="LogAuditTrail" Type="Self.LogAuditTrail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="LogAuditTrail">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Categor__3B75D760">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Restock__UserID__4BAC3F29">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Restock" Type="Self.Restock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Restock">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RestockDe__Produ__4F7CD00D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="RestockDetails" Type="Self.RestockDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="RestockDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RestockDe__Resto__4E88ABD4">
+    <End Role="Restock" Type="Self.Restock" Multiplicity="0..1" />
+    <End Role="RestockDetails" Type="Self.RestockDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restock">
+        <PropertyRef Name="RestockID" />
+      </Principal>
+      <Dependent Role="RestockDetails">
+        <PropertyRef Name="RestockID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReturnsRe__Produ__48CFD27E">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ReturnsRefund" Type="Self.ReturnsRefund" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ReturnsRefund">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReturnsRe__Trans__47DBAE45">
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="0..1" />
+    <End Role="ReturnsRefund" Type="Self.ReturnsRefund" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesTransaction">
+        <PropertyRef Name="TransactionID" />
+      </Principal>
+      <Dependent Role="ReturnsRefund">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Cashi__403A8C7D">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="SalesTransaction">
+        <PropertyRef Name="CashierUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Disco__44FF419A">
+    <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+    <End Role="SalesTransactionDetails" Type="Self.SalesTransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount">
+        <PropertyRef Name="DiscountID" />
+      </Principal>
+      <Dependent Role="SalesTransactionDetails">
+        <PropertyRef Name="DiscountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Produ__440B1D61">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="SalesTransactionDetails" Type="Self.SalesTransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="SalesTransactionDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Trans__4316F928">
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="0..1" />
+    <End Role="SalesTransactionDetails" Type="Self.SalesTransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesTransaction">
+        <PropertyRef Name="TransactionID" />
+      </Principal>
+      <Dependent Role="SalesTransactionDetails">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SBIT3JModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogAuditTrail" EntityType="Self.LogAuditTrail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Restock" EntityType="Self.Restock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestockDetails" EntityType="Self.RestockDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReturnsRefund" EntityType="Self.ReturnsRefund" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesTransaction" EntityType="Self.SalesTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesTransactionDetails" EntityType="Self.SalesTransactionDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__LogAuditT__UserI__52593CB8" Association="Self.FK__LogAuditT__UserI__52593CB8">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LogAuditTrail" EntitySet="LogAuditTrail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Categor__3B75D760" Association="Self.FK__Product__Categor__3B75D760">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Restock__UserID__4BAC3F29" Association="Self.FK__Restock__UserID__4BAC3F29">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Restock" EntitySet="Restock" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RestockDe__Produ__4F7CD00D" Association="Self.FK__RestockDe__Produ__4F7CD00D">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="RestockDetails" EntitySet="RestockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RestockDe__Resto__4E88ABD4" Association="Self.FK__RestockDe__Resto__4E88ABD4">
+      <End Role="Restock" EntitySet="Restock" />
+      <End Role="RestockDetails" EntitySet="RestockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReturnsRe__Produ__48CFD27E" Association="Self.FK__ReturnsRe__Produ__48CFD27E">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ReturnsRefund" EntitySet="ReturnsRefund" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReturnsRe__Trans__47DBAE45" Association="Self.FK__ReturnsRe__Trans__47DBAE45">
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+      <End Role="ReturnsRefund" EntitySet="ReturnsRefund" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Cashi__403A8C7D" Association="Self.FK__SalesTran__Cashi__403A8C7D">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Disco__44FF419A" Association="Self.FK__SalesTran__Disco__44FF419A">
+      <End Role="Discount" EntitySet="Discount" />
+      <End Role="SalesTransactionDetails" EntitySet="SalesTransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Produ__440B1D61" Association="Self.FK__SalesTran__Produ__440B1D61">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="SalesTransactionDetails" EntitySet="SalesTransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Trans__4316F928" Association="Self.FK__SalesTran__Trans__4316F928">
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+      <End Role="SalesTransactionDetails" EntitySet="SalesTransactionDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
