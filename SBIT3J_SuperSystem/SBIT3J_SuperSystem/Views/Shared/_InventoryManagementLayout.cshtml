@@ -21,7 +21,7 @@
     <div class="container-fluid vh-100 p-0 m-0">
 
         <div class="navbar navbar-inverse navbar-fixed-top p-0">
-            <div class="container-fluid bg-dark text-white py-2 px-3 ">
+            <div class="container-fluid text-white py-2 px-3" style="background-color: rgba(87, 27, 39, 1); ">
                 <h3 class="col m-0">Inventory Management</h3>
 
                 <h3 id="dateTime" class="text-center col  m-0">
@@ -35,12 +35,12 @@
 
 
         <div class="container-fluid p-0 d-flex m-0" style="height: 93.3%">
-            <div class="col-2 d-flex flex-column justify-content-between bg-dark p-2 text-center ">
+            <div class="col-2 d-flex flex-column justify-content-between p-2 text-center " style="background-color: rgba(87, 27, 39, 1); ">
                 <div class="list-group gap-4 ">
-                    <div>@Html.ActionLink("Dashboard", "Index", "POS", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
+                    <div>@Html.ActionLink("Dashboard", "Index", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
                     <div>@Html.ActionLink("Inventory", "Index", "Products", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
                     <div>@Html.ActionLink("Restock", "Index", "Restocks", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
-                    <div>@Html.ActionLink("Return / Refunds", "Returns", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
+                    <div>@Html.ActionLink("Return / Refunds", "ReturnRefund", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
                 </div>
                 <div style="bottom: 0;">@Html.ActionLink("Logout", "Index", "Login", new { area = "" }, new { @class = "list-group-item list-group-item-action p-3 bg-black text-white py-4" })</div>
 

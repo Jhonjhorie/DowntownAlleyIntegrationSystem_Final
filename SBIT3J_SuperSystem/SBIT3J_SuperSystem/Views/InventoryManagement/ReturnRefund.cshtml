@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "ReturnRefund";
+    Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
+}
+
+<main class="container-fluid rounded-1 p-4 h-100">
+    <h2>Returns</h2>
+
+
+    <div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <p class="m-0">Search Transact ID: </p>
+                <input type="text" name="name" value="Search Date" />
+                <input type="button" name="name" value="Search" class="btn btn-dark" />
+            </div>
+            <div>
+                <input type="button" name="name" value="Add" class="btn btn-success" />
+                <input type="button" name="name" value="Delete" class="btn btn-danger" />
+                <input type="button" name="name" value="Edi" class="btn btn-warning" />
+            </div>
+        </div>
+
+
+        <table class="table bg-light  border-3 rounded-1 shadow mh-100">
+            <thead>
+                <tr>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Product Code</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Qty. Returned</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">ReSellable</th>
+                    <th scope="col">Customer Name(Optional)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>AS13B</td>
+                    <td>12/02/2023</td>
+                    <td>1</td>
+                    <td>Butas</td>
+                    <td>No</td>
+                    <td>Paultan</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>AS12B</td>
+                    <td>12/02/2023</td>
+                    <td>1</td>
+                    <td>Mantsa</td>
+                    <td>No</td>
+                    <td>Paultan</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>AS13R</td>
+                    <td>12/02/2023</td>
+                    <td>1</td>
+                    <td>Defective</td>
+                    <td>Yes</td>
+                    <td>Paultan</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>

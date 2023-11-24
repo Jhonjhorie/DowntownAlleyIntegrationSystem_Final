@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
+}
+
+<main class="container-fluid rounded-1 p-4 h-100">
+    <h2>Dashboard</h2>
+
+    <div class="row">
+        <div class="col bg-light mx-2 border-3 rounded-1 shadow p-3">
+            <div class="d-flex justify-content-between align-items-center pb-2 ">
+                <h5>Log and Audit Trail</h5>
+                <div class="my-1">
+                    <input type="text" name="name" value="Search" />
+                    <input type="button" name="name" value="Search" class="btn btn-dark" />
+                </div>
+
+            </div>
+            <table class="table border-1 mh-100">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Action Type</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>12/02/2023</td>
+                        <td>Paultan</td>
+                        <td>Add</td>
+                        <td>Product</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>12/02/2023</td>
+                        <td>Paultan</td>
+                        <td>Delete</td>
+                        <td>Product</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>12/02/2023</td>
+                        <td>Jacob</td>
+                        <td>Login</td>
+                        <td>Product</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col bg-light mx-2 border-3 rounded-1 shadow p-3">
+            <div class="d-flex justify-content-between align-items-center pb-2">
+                <h5>Sales Transactions</h5>
+                <div class="my-1">
+                    <input type="text" name="name" value="Search" />
+                    <input type="button" name="name" value="Search" class="btn btn-dark" />
+                </div>
+            </div>
+            <table class="table border-1 mh-100">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Transaction Date</th>
+                        <th scope="col">Transaction Id</th>
+                        <th scope="col">Cashier</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Reciept No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>12/02/2023</td>
+                        <td>1</td>
+                        <td>Paultan</td>
+                        <td>50.00</td>
+                        <td>101</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>12/02/2023</td>
+                        <td>2</td>
+                        <td>Jacob</td>
+                        <td>50.00</td>
+                        <td>102</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>12/02/2023</td>
+                        <td>3</td>
+                        <td>Paultan</td>
+                        <td>50.00</td>
+                        <td>103</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

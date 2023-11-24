@@ -202,29 +202,44 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\Inventorymanagement\InventoryManagementController.cs" />
     <Compile Include="Controllers\Inventorymanagement\POSController.cs" />
     <Compile Include="Controllers\Inventorymanagement\ProductsController.cs" />
     <Compile Include="Controllers\Inventorymanagement\RestockDetailsController.cs" />
     <Compile Include="Controllers\Inventorymanagement\RestocksController.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminMonitoringController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\EmpManagementController.cs" />
-    <Compile Include="Controllers\InventoryManagementController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PayrollController.cs" />
     <Compile Include="Models\Discount.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LogAuditTrail.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\POSandINV.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSandINV.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSandINV.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSandINV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSandINV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSandINV.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\POSandInventory.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -241,30 +256,30 @@
       <DependentUpon>POSandInventory.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Restock.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RestockDetail.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReturnsRefund.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SalesTransaction.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SalesTransactionDetail.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\DiscountRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\User.cs">
-      <DependentUpon>POSandInventory.tt</DependentUpon>
+      <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +302,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\POSandINV.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSandINV.edmx</DependentUpon>
+      <LastGenOutput>POSandINV.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\POSandINV.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSandINV.edmx</DependentUpon>
+      <LastGenOutput>POSandINV.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\POSandInventory.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>POSandInventory.edmx</DependentUpon>
@@ -337,6 +362,13 @@
     <Content Include="Models\POSandInventory.edmx.diagram">
       <DependentUpon>POSandInventory.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\POSandINV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POSandINV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\POSandINV.edmx.diagram">
+      <DependentUpon>POSandINV.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -381,6 +413,8 @@
     <Content Include="Views\RestockDetails\Details.cshtml" />
     <Content Include="Views\RestockDetails\Edit.cshtml" />
     <Content Include="Views\RestockDetails\Index.cshtml" />
+    <Content Include="Views\InventoryManagement\Index.cshtml" />
+    <Content Include="Views\InventoryManagement\ReturnRefund.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

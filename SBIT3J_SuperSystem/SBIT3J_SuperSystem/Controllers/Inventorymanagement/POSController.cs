@@ -44,5 +44,13 @@ namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 
         }
 
+        [HttpGet]
+        public JsonResult getDiscountvalue(int DiscountId)
+        {
+            decimal discount = (decimal)objSBIT3JEntities.Discounts.Single(model => model.DiscountID == DiscountId).DiscountAmount;
+            return Json(discount, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
