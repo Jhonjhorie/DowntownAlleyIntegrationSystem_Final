@@ -58,108 +58,124 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#Product').val(0);
-            $("#Product").change(function () {
-                var ProductID = $('#Product').val();
-                GetUnitPrice(ProductID);
+            // Event handlers and initializations
+            $('#Product').val(0).change(function () {
+                var productId = $(this).val();
+                GetUnitPrice(productId);
             });
 
-            $('#Discount').val(0);
-            $("#Discount").change(function () {
-                var DiscountId = $('#Discount').val();
-                GetDiscount(DiscountId);
+            $('#Discount').val(0).change(function () {
+                var discountId = $(this).val();
+                GetDiscount(discountId);
             });
 
-            $("input[type=text]").change(function () {
-                CalculateSubTotal()
-            });
-
-            $("#btnAddtoOrder").click(function () {
-                AddItemtoList()
-            });
-
-
-            $("#btnCancelOrder").click(function () {
-                ResetItem()
-            });
-
+            $("input[type=text]").change(CalculateSubTotal);
+            $("#btnAddtoOrder").click(AddItemtoList);
+            $("#btnCancelOrder").click(ResetItem);
             $("#ChangeConfirm").click(function () {
-                CalculateChange()
+                CalculateChange();
             });
         });
+
+        function FinalPayment() {
+            var objSalesTransaction = {};
+            var ListofOrderDetailViewModel = new Array();
+            //SalesTransactionDetail
+            objSalesTransaction.CashierUserID = 1;
+            objSalesTransaction.TotalAmount = $("#FinalTotalBill").val();
+            objSalesTransaction.ReceiptInfo = "";
+
+            $("#tblOrder").find("tr:gt(0)").each(function () {
+                var SalesTransactionDetail = {};
+                SalesTransactionDetail.ProductID = $(this).find("td:eq(0)").text();
+                SalesTransactionDetail.QuantitySold = $(this).find("td:eq(3)").text();
+                SalesTransactionDetail.PricePerUnit = $(this).find("td:eq(2)").text();
+                SalesTransactionDetail.Subtotal = $(this).find("td:eq(5)").text();
+                SalesTransactionDetail.DiscountID = $(this).find("td:eq(4)").text();
+                ListofOrderDetailViewModel.push(SalesTransactionDetail);
+            });
+
+            objSalesTransaction.ListofOrderDetailViewModel = ListofOrderDetailViewModel;
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(objSalesTransaction),
+                url: '/POS/Index',
+                success: function (data) {
+                    alert(data)
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error: " + status, error);
+                    alert("There is some problem to adding the data. Check the console for details.");
+                }
+
+            });
+        }
+
 
 
 
 
         function RemoveItem(itemID) {
             $(itemID).closest('tr').remove();
-            FinalOrderTotal()
+            FinalOrderTotal();
         }
-
 
         function AddItemtoList() {
             var tblItemList = $("#tblOrder");
-            var price = $("#unitprice").val();
-            var quantity = $("#txtQuantity").val();
-            var discount = $("#txtDiscount").val();
-            var productid = $("#Product").val();
-            var productname = $("#Product option:selected").text();
+            var price = parseFloat($("#unitprice").val());
+            var quantity = parseFloat($("#txtQuantity").val());
+            var discount = parseFloat($("#txtDiscount").val());
+            var productId = $("#Product").val();
+            var productName = $("#Product option:selected").text();
 
             var total = (price * quantity) - discount;
 
-            var itemlist = "<tr> <td hidden>" +
-                productid +
-                "</td> <td>" +
-                productname +
-                "</td> <td>" +
-                parseFloat(price).toFixed(2) +
-                "</td> <td>" +
-                parseFloat(quantity).toFixed() +
-                "</td> <td>" +
-                parseFloat(discount).toFixed() +
-                "</td> <td>" +
-                parseFloat(total).toFixed(2) +
-                "</td> <td>     <input type='button' value='Remove' name='remove' class='btn btn-danger'  onclick='RemoveItem(this)' /> </tr> </tr>";
+            var itemlist = `<tr>
+        <td hidden>${productId}</td>
+        <td>${productName}</td>
+        <td>${price.toFixed(2)}</td>
+        <td>${quantity.toFixed()}</td>
+        <td>${discount.toFixed()}</td>
+        <td>${total.toFixed(2)}</td>
+        <td><input type='button' value='Remove' name='remove' class='btn btn-danger' onclick='RemoveItem(this)' /></td>
+    </tr>`;
 
             tblItemList.append(itemlist);
-            FinalOrderTotal()
+            FinalOrderTotal();
             ResetItem();
         }
 
-
         function FinalOrderTotal() {
-            $("#FinalSubTotal").val("0.00");
-            var FinalTotal = 0.00;
+            var finalSubTotal = 0.00;
             $("#tblOrder").find("tr:gt(0)").each(function () {
-                var Total = parseFloat($(this).find("td:eq(5)").text());
-                FinalTotal += Total;
+                finalSubTotal += parseFloat($(this).find("td:eq(5)").text());
             });
 
-            $("#FinalSubTotal").val(parseFloat(FinalTotal).toFixed(2));
+            $("#FinalSubTotal").val(finalSubTotal.toFixed(2));
 
-            var Vat = 0.12 * FinalTotal;
-            var FinalTotalVatIncluded = FinalTotal + Vat;
+            var vat = 0.12 * finalSubTotal;
+            var finalTotalVatIncluded = finalSubTotal + vat;
 
-            $("#vat").val(parseFloat(Vat).toFixed(2));
-            $("#FinalTotalBill").val(parseFloat(FinalTotalVatIncluded).toFixed(2));
+            $("#vat").val(vat.toFixed(2));
+            $("#FinalTotalBill").val(finalTotalVatIncluded.toFixed(2));
         }
 
         function CalculateChange() {
-            var FinalTotal = 0.00;
+            var finalTotal = 0.00;
             $("#tblOrder").find("tr:gt(0)").each(function () {
-                var Total = parseFloat($(this).find("td:eq(5)").text());
-                FinalTotal += Total;
+                finalTotal += parseFloat($(this).find("td:eq(5)").text());
             });
 
+            var vat = 0.12 * finalTotal;
+            var finalTotalVatIncluded = finalTotal + vat;
+            var customerMoney = parseFloat($("#CustomerMoney").val());
+            var change = customerMoney - finalTotalVatIncluded;
 
-            var Vat = 0.12 * FinalTotal;
-            var FinalTotalVatIncluded = FinalTotal + Vat;
-            var CustomerMoney = parseFloat($("#CustomerMoney").val());
-            var Change = CustomerMoney - FinalTotalVatIncluded;
-
-            $("#CustomerChange").val(parseFloat(Change).toFixed(2));
-
-
+            $("#CustomerChange").val(change.toFixed(2));
         }
 
 
@@ -197,13 +213,9 @@
             // Trigger the print functionality
             printWindow.print();
 
-            $("#FinalTotalBill").val("");
-            $("#vat").val("");
-            $("#FinalSubTotal").val("");
-            $("#CustomerChange").val("");
-            $("#CustomerMoney").val("");
-            $("#tblOrder").find("tbody").empty();
-            ResetItem()
+            $("#FinalTotalBill, #vat, #FinalSubTotal, #CustomerChange, #CustomerMoney").val("");
+            $("#tblOrder tbody").empty();
+            ResetItem();
 
         }
 
@@ -370,6 +382,7 @@
 
                     <div class="text-center mt-1">
                         <input type="button" class="btn btn-success" name="name" value="Print Receipt" onclick="PrintReceipt()" />
+                        <input type="button" class="btn btn-success" name="name" value="Finalpayment" onclick="FinalPayment()" />
                     </div>
 
                 </div>

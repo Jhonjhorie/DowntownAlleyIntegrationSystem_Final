@@ -15,7 +15,7 @@
 
         </p>
         <p>
-            @Html.ActionLink("Archived", "ArchivedProduct")
+            @Html.ActionLink("Archived", "ArchivedProduct", null, new { @class = "btn btn-info" })
 
         </p>
     </div>
@@ -77,10 +77,10 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-warning" }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger" })
                 </td>
+     
             </tr>
         }
 

@@ -52,5 +52,14 @@ namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 
         }
 
+        [HttpPost]
+        public JsonResult Index (SalesTransaction objSalesTransaction)
+        {
+            TransactionRepository objTransactionRepository = new TransactionRepository();
+            objTransactionRepository.AddOrder(objSalesTransaction);
+            return Json("Order has been Succesfully Created!", JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }

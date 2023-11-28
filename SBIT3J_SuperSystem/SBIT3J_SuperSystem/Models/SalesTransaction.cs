@@ -26,7 +26,9 @@ namespace SBIT3J_SuperSystem.Models
         public Nullable<int> CashierUserID { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public string ReceiptInfo { get; set; }
-    
+
+        public IEnumerable<SalesTransactionDetail> ListofOrderDetailViewModel { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReturnsRefund> ReturnsRefunds { get; set; }
         public virtual User User { get; set; }

@@ -11,7 +11,7 @@
     <p>
     </p>
     <p>
-        @Html.ActionLink("Back", "Index")
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })
     </p>
 </div>
 <table class="table">
@@ -76,9 +76,9 @@
             @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

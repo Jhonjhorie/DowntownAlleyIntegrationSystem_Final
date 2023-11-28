@@ -276,6 +276,7 @@
     </Compile>
     <Compile Include="Repositories\DiscountRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\User.cs">
