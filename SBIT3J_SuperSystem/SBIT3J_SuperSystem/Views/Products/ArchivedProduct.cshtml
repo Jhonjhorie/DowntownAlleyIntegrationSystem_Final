@@ -5,82 +5,85 @@
     Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
 }
 
-<h2>ArchivedProduct</h2>
+<div class="container-fluid rounded-1 p-4 h-100" ">
+    <h2>ArchivedProduct</h2>
 
-<div class="d-flex justify-content-between">
-    <p>
-    </p>
-    <p>
-        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })
-    </p>
+    <div class="d-flex justify-content-between">
+        <p>
+        </p>
+        <p>
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })
+        </p>
+    </div>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Archived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.StockLevel <= 10 ? "table-danger" : (item.StockLevel <= 20 ? "table-warning" : ""))">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Archived)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StockLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Archived)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StockLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Archived)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }, new { @class = "btn btn-info" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
-
-</table>

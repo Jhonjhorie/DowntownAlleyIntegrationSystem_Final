@@ -7,26 +7,25 @@ using System.Web.Mvc;
 
 namespace SBIT3J_SuperSystem.Repositories
 {
-    public class ProductRepository
+    public class RestockRepository
     {
         private SBIT3JEntities objSBIT3JEntities;
 
-        public ProductRepository()
+        public RestockRepository()
         {
             objSBIT3JEntities = new SBIT3JEntities();
         }
-        public IEnumerable<SelectListItem> GetAllProduct()
+        public IEnumerable<SelectListItem> GetAllUser()
         {
             IEnumerable<SelectListItem> objSelectListItems = new List<SelectListItem>();
-            objSelectListItems = (from obj in objSBIT3JEntities.Products
+            objSelectListItems = (from obj in objSBIT3JEntities.Users
                                   select new SelectListItem()
                                   {
-                                      Text = obj.ProductCode,
-                                      Value = obj.ProductID.ToString(),
+                                      Text = obj.Username,
+                                      Value = obj.UserID.ToString(),
                                       Selected = true
                                   }).ToList();
             return objSelectListItems;
         }
     }
-    
 }
