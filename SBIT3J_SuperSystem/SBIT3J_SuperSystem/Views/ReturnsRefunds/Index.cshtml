@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SBIT3J_SuperSystem.Models.ReturnsRefund>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
+}
+
+<div class="container-fluid rounded-1 p-4 h-100">
+    <h2>Returns</h2>
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center gap-2">
+            <p class="m-0">Search Transact ID: </p>
+            <input type="text" name="name" value="Search Date" />
+            <input type="button" name="name" value="Search" class="btn btn-dark" />
+        </div>
+        <div>
+            <input type="button" name="name" value="Add" class="btn btn-success" />
+            <input type="button" name="name" value="Delete" class="btn btn-danger" />
+            <input type="button" name="name" value="Edi" class="btn btn-warning" />
+        </div>
+    </div>
+    <table class="table bg-light  border-3 rounded-1 shadow mh-100">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityReturned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resellable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesTransaction.ReceiptInfo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityReturned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resellable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesTransaction.ReceiptInfo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReturnID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ReturnID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReturnID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

@@ -38,8 +38,8 @@
                 <div class="list-group gap-4 ">
                     <div>@Html.ActionLink("Dashboard", "Index", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4 " })</div>
                     <div>@Html.ActionLink("Inventory", "Index", "Products", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
-                    <div>@Html.ActionLink("Restock", "Index", "Restocks", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
-                    <div>@Html.ActionLink("Return / Refunds", "ReturnRefund", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
+                    <div>@Html.ActionLink("Restock", "Restock", "InventoryManagement", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
+                    <div>@Html.ActionLink("Return / Refunds", "Index", "ReturnsRefunds", new { area = "" }, new { @class = "list-group-item list-group-item-action py-4" })</div>
                 </div>
                 <div style="bottom: 0;">@Html.ActionLink("Logout", "Index", "Login", new { area = "" }, new { @class = "list-group-item list-group-item-action p-3 bg-black text-white py-4" })</div>
 

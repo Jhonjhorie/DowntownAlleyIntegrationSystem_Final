@@ -10,116 +10,116 @@ using SBIT3J_SuperSystem.Models;
 
 namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 {
-    public class RestockDetailsController : Controller
+    public class ReturnsRefundsController : Controller
     {
         private SBIT3JEntities db = new SBIT3JEntities();
 
-        // GET: RestockDetails
+        // GET: ReturnsRefunds
         public ActionResult Index()
         {
-            var restockDetails = db.RestockDetails.Include(r => r.Product).Include(r => r.Restock);
-            return View(restockDetails.ToList());
+            var returnsRefunds = db.ReturnsRefunds.Include(r => r.Product).Include(r => r.SalesTransaction);
+            return View(returnsRefunds.ToList());
         }
 
-        // GET: RestockDetails/Details/5
+        // GET: ReturnsRefunds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RestockDetail restockDetail = db.RestockDetails.Find(id);
-            if (restockDetail == null)
+            ReturnsRefund returnsRefund = db.ReturnsRefunds.Find(id);
+            if (returnsRefund == null)
             {
                 return HttpNotFound();
             }
-            return View(restockDetail);
+            return View(returnsRefund);
         }
 
-        // GET: RestockDetails/Create
+        // GET: ReturnsRefunds/Create
         public ActionResult Create()
         {
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode");
-            ViewBag.RestockID = new SelectList(db.Restocks, "RestockID", "RestockID");
+            ViewBag.TransactionID = new SelectList(db.SalesTransactions, "TransactionID", "ReceiptInfo");
             return View();
         }
 
-        // POST: RestockDetails/Create
+        // POST: ReturnsRefunds/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RestockDetailID,RestockID,ProductID,QuantityAdded,TotalAmount")] RestockDetail restockDetail)
+        public ActionResult Create([Bind(Include = "ReturnID,TransactionID,ProductID,ReturnDate,QuantityReturned,Reason,Resellable,CustomerName")] ReturnsRefund returnsRefund)
         {
             if (ModelState.IsValid)
             {
-                db.RestockDetails.Add(restockDetail);
+                db.ReturnsRefunds.Add(returnsRefund);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", restockDetail.ProductID);
-            ViewBag.RestockID = new SelectList(db.Restocks, "RestockID", "RestockID", restockDetail.RestockID);
-            return View(restockDetail);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", returnsRefund.ProductID);
+            ViewBag.TransactionID = new SelectList(db.SalesTransactions, "TransactionID", "ReceiptInfo", returnsRefund.TransactionID);
+            return View(returnsRefund);
         }
 
-        // GET: RestockDetails/Edit/5
+        // GET: ReturnsRefunds/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RestockDetail restockDetail = db.RestockDetails.Find(id);
-            if (restockDetail == null)
+            ReturnsRefund returnsRefund = db.ReturnsRefunds.Find(id);
+            if (returnsRefund == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", restockDetail.ProductID);
-            ViewBag.RestockID = new SelectList(db.Restocks, "RestockID", "RestockID", restockDetail.RestockID);
-            return View(restockDetail);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", returnsRefund.ProductID);
+            ViewBag.TransactionID = new SelectList(db.SalesTransactions, "TransactionID", "ReceiptInfo", returnsRefund.TransactionID);
+            return View(returnsRefund);
         }
 
-        // POST: RestockDetails/Edit/5
+        // POST: ReturnsRefunds/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RestockDetailID,RestockID,ProductID,QuantityAdded,TotalAmount")] RestockDetail restockDetail)
+        public ActionResult Edit([Bind(Include = "ReturnID,TransactionID,ProductID,ReturnDate,QuantityReturned,Reason,Resellable,CustomerName")] ReturnsRefund returnsRefund)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(restockDetail).State = EntityState.Modified;
+                db.Entry(returnsRefund).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", restockDetail.ProductID);
-            ViewBag.RestockID = new SelectList(db.Restocks, "RestockID", "RestockID", restockDetail.RestockID);
-            return View(restockDetail);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductCode", returnsRefund.ProductID);
+            ViewBag.TransactionID = new SelectList(db.SalesTransactions, "TransactionID", "ReceiptInfo", returnsRefund.TransactionID);
+            return View(returnsRefund);
         }
 
-        // GET: RestockDetails/Delete/5
+        // GET: ReturnsRefunds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RestockDetail restockDetail = db.RestockDetails.Find(id);
-            if (restockDetail == null)
+            ReturnsRefund returnsRefund = db.ReturnsRefunds.Find(id);
+            if (returnsRefund == null)
             {
                 return HttpNotFound();
             }
-            return View(restockDetail);
+            return View(returnsRefund);
         }
 
-        // POST: RestockDetails/Delete/5
+        // POST: ReturnsRefunds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RestockDetail restockDetail = db.RestockDetails.Find(id);
-            db.RestockDetails.Remove(restockDetail);
+            ReturnsRefund returnsRefund = db.ReturnsRefunds.Find(id);
+            db.ReturnsRefunds.Remove(returnsRefund);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

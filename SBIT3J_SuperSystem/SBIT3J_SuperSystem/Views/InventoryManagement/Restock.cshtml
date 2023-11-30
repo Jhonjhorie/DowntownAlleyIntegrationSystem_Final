@@ -1,8 +1,9 @@
-﻿@model IEnumerable<SBIT3J_SuperSystem.Models.Restock>
+﻿@model Tuple<IEnumerable<SelectListItem>, List<SBIT3J_SuperSystem.Models.Restock>>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Restock";
     Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
+
 }
 
 <div class="container-fluid rounded-1 p-4 h-100">
@@ -12,39 +13,25 @@
         Create
     </button>
     <table class="table">
+
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.Username)
-            </th>
+            <th>RestockID</th>
+            <th>Date</th>
+            <th>Total Amount</th>
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var restock in Model.Item2)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Username)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.RestockID }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.RestockID }, new { @class = "btn btn-danger" })
-                </td>
+                <td>@restock.RestockID</td>
+                <td>@restock.Date</td>
+                <td>@restock.TotalAmount</td>
+                <td></td>
             </tr>
         }
-
     </table>
+
 </div>
 
 
@@ -62,8 +49,8 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.SelectedProductId, "Select Product", htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.SelectedProductId, new SelectList(Model.Products, "ProductId", "ProductName"), "Select a Product", new { @class = "form-control" })
+                        @Html.DropDownList("ProductId", Model.Item1, "Select a Product")
+                    
                 </div>
             </div>
 
@@ -86,3 +73,4 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+

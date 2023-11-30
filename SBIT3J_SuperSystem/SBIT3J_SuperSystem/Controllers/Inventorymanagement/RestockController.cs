@@ -3,33 +3,22 @@ using SBIT3J_SuperSystem.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 {
-    public class InventoryManagementController : Controller
+    public class RestockController : Controller
     {
         private SBIT3JEntities objSBIT3JEntities;
 
-        // Use a protected or public constructor
-        public InventoryManagementController()
+        RestockController()
         {
             objSBIT3JEntities = new SBIT3JEntities();
         }
 
-        // GET: InventoryManagement
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult ReturnRefund()
-        {
-            return View();
-        }
-
         // GET: Restock
-        public ActionResult Restock()
+        public ActionResult Index()
         {
             // Get all products for the dropdown
             ProductRepository objProductRepository = new ProductRepository();

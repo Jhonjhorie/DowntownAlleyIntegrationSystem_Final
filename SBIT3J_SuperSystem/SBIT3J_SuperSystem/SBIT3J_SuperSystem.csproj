@@ -205,8 +205,8 @@
     <Compile Include="Controllers\Inventorymanagement\InventoryManagementController.cs" />
     <Compile Include="Controllers\Inventorymanagement\POSController.cs" />
     <Compile Include="Controllers\Inventorymanagement\ProductsController.cs" />
-    <Compile Include="Controllers\Inventorymanagement\RestockDetailsController.cs" />
-    <Compile Include="Controllers\Inventorymanagement\RestocksController.cs" />
+    <Compile Include="Controllers\Inventorymanagement\RestockController.cs" />
+    <Compile Include="Controllers\Inventorymanagement\ReturnsRefundsController.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>POSandINV.tt</DependentUpon>
     </Compile>
@@ -405,18 +405,14 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\ArchivedProduct.cshtml" />
-    <Content Include="Views\Restocks\Create.cshtml" />
-    <Content Include="Views\Restocks\Delete.cshtml" />
-    <Content Include="Views\Restocks\Details.cshtml" />
-    <Content Include="Views\Restocks\Edit.cshtml" />
-    <Content Include="Views\Restocks\Index.cshtml" />
-    <Content Include="Views\RestockDetails\Create.cshtml" />
-    <Content Include="Views\RestockDetails\Delete.cshtml" />
-    <Content Include="Views\RestockDetails\Details.cshtml" />
-    <Content Include="Views\RestockDetails\Edit.cshtml" />
-    <Content Include="Views\RestockDetails\Index.cshtml" />
     <Content Include="Views\InventoryManagement\Index.cshtml" />
     <Content Include="Views\InventoryManagement\ReturnRefund.cshtml" />
+    <Content Include="Views\InventoryManagement\Restock.cshtml" />
+    <Content Include="Views\ReturnsRefunds\Create.cshtml" />
+    <Content Include="Views\ReturnsRefunds\Delete.cshtml" />
+    <Content Include="Views\ReturnsRefunds\Details.cshtml" />
+    <Content Include="Views\ReturnsRefunds\Edit.cshtml" />
+    <Content Include="Views\ReturnsRefunds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
