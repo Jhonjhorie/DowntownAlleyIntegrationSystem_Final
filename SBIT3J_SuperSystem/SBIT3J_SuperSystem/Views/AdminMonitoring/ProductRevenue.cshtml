@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "ProductRevenue";
+    Layout = "~/Views/Shared/_ManagementInfoLayout1cshtml.cshtml";
+
+    var periodicity = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Daily", Value = "Daily" },
+        new SelectListItem { Text = "Monthly", Value = "Monthly" },
+        new SelectListItem { Text = "Annually", Value = "Annually" }
+    };
+
+    var months = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "January", Value = "1" },
+        new SelectListItem { Text = "February", Value = "2" },
+        new SelectListItem { Text = "March", Value = "3" },
+        new SelectListItem { Text = "April", Value = "4" },
+        new SelectListItem { Text = "May", Value = "5" },
+        new SelectListItem { Text = "June", Value = "6" },
+        new SelectListItem { Text = "July", Value = "7" },
+        new SelectListItem { Text = "August", Value = "8" },
+        new SelectListItem { Text = "September", Value = "9" },
+        new SelectListItem { Text = "October", Value = "10" },
+        new SelectListItem { Text = "November", Value = "11" },
+        new SelectListItem { Text = "December", Value = "12" }
+    };
+
+    var year = new List<SelectListItem>
+{
+        new SelectListItem { Text = "2023", Value = "year2023"},
+        new SelectListItem { Text = "2023", Value = "year2022"},
+        new SelectListItem { Text = "2023", Value = "year2021"}
+};
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Dashboard</title>
+    <link href="~/Asset_group1/css/ProductRevenue.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<div class="page">
+    <h3 class="title"><b>Product Revenue</b></h3>
+    <div id="container-1">
+        <!--Start of Container 1-->
+        <div class="col-card">
+            <center>
+                <h6>Total Sales</h6>
+                <h3>419K</h3>
+            </center>
+        </div>
+        <div class="col-card">
+            <center>
+                <h6>Ave Sale Per Day</h6>
+                <h3>24.23K</h3>
+            </center>
+        </div>
+        <div class="col-card">
+            <center>
+                <h6>Ave Order Per Day</h6>
+                <h3>121</h3>
+            </center>
+        </div>
+        <div class="col-card">
+            <center>
+                <h6>Total Order</h6>
+                <h3>3532</h3>
+            </center>
+        </div>
+    </div>
+    <!--End of Container 1-->
+    <div class="second-container">
+        <div id="form-container">
+            <!--Start of Container 3-->
+            <div id="container-2">
+                <!--Start of Container 2-->
+                <div class="form-1">
+                    <!--Start of form 1-->
+                    <form action="form-action">
+                        <select name="periodicity" id="periodicity" class="form-actions">
+                            <option value="Daily">Daily</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Anually">Anually</option>
+                        </select>
+                    </form>
+
+                    <form action="form-action">
+                        <select name="year" id="year" class="form-actions">
+                            <option value="2023">2023</option>
+                            <option value="2022">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </form>
+
+                    <form action="form-action">
+                        <select name="month" id="month" class="form-actions">
+                            <option value="November">November</option>
+                            <option value="October">October</option>
+                            <option value="September">September</option>
+                            <option value="August">August</option>
+                            <option value="July">July</option>
+                            <option value="June">June</option>
+                            <option value="May">May</option>
+                            <option value="April">April</option>
+                            <option value="March">March</option>
+                            <option value="February">February</option>
+                            <option value="January">January</option>
+                        </select>
+                    </form>
+                </div>
+                <!--End of form 1-->
+
+                <div class="form-2">
+                    <label for="start-date">from</label>
+                    <input type="date" name="" id="" class="form-actions">
+                    <label for="end-date">to</label>
+                    <input type="date" name="" id="" class="form-actions">
+                </div>
+            </div>
+            <!--End of Container 2-->
+
+        </div>
+        <div id="container-3">
+            <!--End of Container 3-->
+            <div><button type="button" id="print-data" class="button-form">Print Data</button></div>
+            <div><button type="button" id="reset-data" class="button-form">Reset</button></div>
+        </div>
+    </div>
+    <div id="container-4">
+        <div class="row1">
+
+                <div id="line_top_x">
+                    <div id="chart-part"></div>
+                </div>
+
+        </div>
+        <div class="row2">
+            <!--Start of row 2-->
+
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="table-header">
+                            <center>Fast Moving Products</center>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Product</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product5</td>
+                        <td>419,437.84</td>
+                    </tr>
+                    <tr>
+                        <td>Product3</td>
+                        <td>225,235</td>
+                    </tr>
+                    <tr>
+                        <td>Product1</td>
+                        <td>143,235.20</td>
+                    </tr>
+                    <tr>
+                        <td>Product2</td>
+                        <td>136,436.50</td>
+                    </tr>
+                    <tr>
+                        <td>Product4</td>
+                        <td>132,537</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--End of row 2-->
+    </div>
+</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['line']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', ''); // Edit all col but please do not touch this shit
+            data.addColumn('number', 'Product1');
+            data.addColumn('number', 'Product2');
+            data.addColumn('number', 'Product3');
+            data.addColumn('number', 'Product4');
+            data.addColumn('number', 'Product5');
+
+            data.addRows([
+                [1, 37.8, 0, 41.8, 40, 22],
+                [2, 30.9, 80, 32.4, 40, 25],
+                [3, 25.4, 57, 25.7, 40, 28],
+                [4, 11.7, 80.8, 10.5, 40, 22],
+                [5, 11.9, 20.6, 10.4, 40, 22],
+                [6, 8.8, 20.6, 7.7, 41, 13],
+                [7, 7.6, 50, 9.6, 40, 80],
+                [8, 12.3, 70.2, 10.6, 32, 50],
+                [9, 16.9, 50, 14.8, 40, 70],
+                [10, 12.8, 20, 11.6, 40, 100],
+                [11, 5.3, 20, 4.7, 40, 62],
+                [12, 6.6, 20, 5.2, 40, 52],
+                [13, 4.8, 70, 3.6, 21, 22],
+                [14, 4.2, 70, 120, 44, 22],
+                [15, 12.8, 70, 11.6, 40, 22],
+                [16, 5.3, 70, 4.7, 40, 22],
+                [17, 6.6, 50, 5.2, 47, 22],
+                [18, 4.8, 35, 3.6, 40, 22],
+                [19, 4.2, 20, 120, 40, 22],
+                [20, 4.2, 80, 0, 40, 22],
+                [21, 37.8, 50.8, 41.8, 40, 22],
+                [22, 30.9, 69.5, 32.4, 40, 25],
+                [23, 25.4, 57, 25.7, 40, 28],
+                [24, 11.7, 18.8, 10.5, 40, 22],
+                [25, 11.9, 17.6, 10.4, 40, 22],
+                [26, 8.8, 13.6, 7.7, 41, 13],
+                [27, 7.6, 12.3, 9.6, 40, 80],
+                [28, 12.3, 29.2, 10.6, 32, 50],
+                [29, 16.9, 42.9, 14.8, 40, 70],
+                [30, 76.9, 22.9, 14.8, 20, 70],
+            ]);
+
+            var options = {
+                chart: {},
+                width: 700,
+                height: 300,
+                backgroundColor: 'transparent',
+                chartArea: {
+                    backgroundColor: 'transparent',
+
+                },
+                axes: {
+                    x: {
+                        0: {
+                            side: 'top'
+                        }
+
+                    },
+                    textStyle: {
+                        color: 'blue'
+                    }
+                }
+            };
+
+            var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+</script>

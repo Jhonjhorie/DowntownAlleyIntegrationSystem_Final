@@ -15,17 +15,6 @@ namespace SBIT3J_SuperSystem.Repositories
         {
             objSBIT3JEntities = new SBIT3JEntities();
         }
-        public IEnumerable<SelectListItem> GetAllUser()
-        {
-            IEnumerable<SelectListItem> objSelectListItems = new List<SelectListItem>();
-            objSelectListItems = (from obj in objSBIT3JEntities.Users
-                                  select new SelectListItem()
-                                  {
-                                      Text = obj.Username,
-                                      Value = obj.UserID.ToString(),
-                                      Selected = true
-                                  }).ToList();
-            return objSelectListItems;
-        }
+        
     }
 }

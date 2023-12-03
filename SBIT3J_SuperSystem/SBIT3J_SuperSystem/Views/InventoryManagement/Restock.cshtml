@@ -6,13 +6,79 @@
 
 }
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#ProductId').val(0).change(function () {
+            var productId = $('#ProductId').val();
+            GetUnitPrice(productId);
+        });
+
+        var button = $("#clickMeButton");
+
+
+        // Add a click event listener to the button
+        button.on("click", function () {
+            var tblItemList = $("#tblRestock");
+            var productId = $("#ProductId").val();
+            var productName = $("#ProductId option:selected").text();
+            var quantity = $("#txtQuantity").val();
+            var unitprice = $("#unitprice").val();
+            var TotalAmount = quantity * unitprice; // Assu`ming TotalAmount should be the same as quantity
+
+            if (productId === "" || quantity === "") {
+                alert("Please select a product and enter a quantity.");
+                return;
+            }
+
+            var itemlist = `<tr>
+            <td>${productId}</td>
+            <td>${productName}</td>
+            <td>${quantity}</td>
+            <td>${TotalAmount}</td>
+        </tr>`;
+
+            tblItemList.append(itemlist);
+
+            $("#ProductId, #txtQuantity,").val("");
+            $("#unitprice").val(0.00);
+        });
+    });
+
+    function GetUnitPrice(ProductID) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: { ProductID: ProductID },
+            url: '/Inventorymanagement/getItemUnitPrice',
+            success: function (data) {
+                $("#unitprice").val(parseFloat(data).toFixed(2));
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: " + status, error);
+                alert("There is some problem getting the Unit Price. Check the console for details.");
+            }
+        });
+    }
+</script>
+
 <div class="container-fluid rounded-1 p-4 h-100">
     <h2>Restock</h2>
+
 
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
         Create
     </button>
-    <table class="table">
+    <table id="tblOrder" class="table">
 
         <tr>
             <th>RestockID</th>
@@ -40,37 +106,52 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h4 class="modal-title" id="myModalLabel">Restock</h4>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
                 <div class="form-group">
-                        @Html.DropDownList("ProductId", Model.Item1, "Select a Product")
-                    
+                    <div class="d-flex  gap-4">
+                        <div class="form-group">
+                            Product Code:
+                            @Html.DropDownList("ProductId", new SelectList(Model.Item1, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            Quantity:
+                            <input type="text" name="Quantity" value="" id="txtQuantity" class="form-control" />
+                        </div>
+                        <div class="mt-4">
+                            <button id="clickMeButton" class="btn btn-success">Add</button>
+                        </div>
+                    </div>
+
+                    Price:
+                    <input type="text" name="productprice" value="0.00" id="unitprice" class="form-control" />
+
+                    <table id="tblRestock" class="table">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Code</th>
+                                <th>Quantity</th>
+                                <th>TotalAmount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be added dynamically here -->
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 
-            <!-- Modal Footer (Optional) -->
             <div class="modal-footer">
+                <input type="button" class="btn btn-success" id="Save" value="Save" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-
             </div>
+
         </div>
     </div>
 </div>
-
-
-<!-- Bootstrap CSS -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS (Popper.js and Bootstrap JS) -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 

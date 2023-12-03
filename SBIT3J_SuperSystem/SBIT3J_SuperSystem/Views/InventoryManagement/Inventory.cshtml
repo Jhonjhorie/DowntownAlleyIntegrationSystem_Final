@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_InventoryManagementLayout.cshtml";
+}
+
+<main class="container-fluid rounded-1 bg-body-secondary p-4 h-100">
+    <div class="d-flex justify-content-between mb-2">
+        <h2>Inventory</h2>
+
+        <div>@Html.ActionLink("Go to Archives", "InventoryArchives", "InventoryManagement", new { area = "" }, new { @class = "btn btn-outline-warning" })</div>
+    </div>
+
+    <div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <p class="m-0">Search Product: </p>
+                <input type="text" name="name" value="" />
+                <input type="button" name="name" value="Search" class="btn btn-dark" />
+            </div>
+            <div>
+                <input type="button" name="name" value="Add" class="btn btn-success" />
+                <input type="button" name="name" value="Edit" class="btn btn-primary" />
+                <input type="button" name="name" value="Archive" class="btn btn-warning" />
+                <input type="button" name="name" value="Delete" class="btn btn-danger" />
+            </div>
+        </div>
+
+
+        <table class="table bg-light  border-3 rounded-1 shadow mh-100">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>

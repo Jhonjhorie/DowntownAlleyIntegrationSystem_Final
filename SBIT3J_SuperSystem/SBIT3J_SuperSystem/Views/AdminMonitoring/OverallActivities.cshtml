@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "OverallActivities";
+    Layout = "~/Views/Shared/_ManagementInfoLayout1cshtml.cshtml";
+
+        var periodicity = new List<SelectListItem>
+    {
+            new SelectListItem { Text = "Daily", Value = "Daily" },
+            new SelectListItem { Text = "Monthly", Value = "Monthly" },
+            new SelectListItem { Text = "Annually", Value = "Annually" }
+        };
+
+        var months = new List<SelectListItem>
+    {
+            new SelectListItem { Text = "January", Value = "1" },
+            new SelectListItem { Text = "February", Value = "2" },
+            new SelectListItem { Text = "March", Value = "3" },
+            new SelectListItem { Text = "April", Value = "4" },
+            new SelectListItem { Text = "May", Value = "5" },
+            new SelectListItem { Text = "June", Value = "6" },
+            new SelectListItem { Text = "July", Value = "7" },
+            new SelectListItem { Text = "August", Value = "8" },
+            new SelectListItem { Text = "September", Value = "9" },
+            new SelectListItem { Text = "October", Value = "10" },
+            new SelectListItem { Text = "November", Value = "11" },
+            new SelectListItem { Text = "December", Value = "12" }
+        };
+
+        var year = new List<SelectListItem>
+    {
+            new SelectListItem { Text = "2023", Value = "year2023"},
+            new SelectListItem { Text = "2023", Value = "year2022"},
+            new SelectListItem { Text = "2023", Value = "year2021"}
+    };
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier Activities</title>
+    <link href="~/Asset_group1/css/OverallActivities.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<div class="page">
+    <!--Start Page-->
+    <h3 class="title"><b>Overall Activities</b></h3>
+    <div class="second-container">
+        <div id="form-container">
+            <!--Start of Container 3-->
+            <div id="container-2">
+                <!--Start of Container 2-->
+                <div class="form-1">
+                    <!--Start of form 1-->
+
+                    @Html.DropDownList("periodicity", periodicity, new { @class = "form-actions" })
+
+                    @Html.DropDownList("year", year, new { @class = "form-actions" })
+
+                    @Html.DropDownList("month", months, new { @class = "form-actions" })
+
+                </div><!--End of form 1-->
+
+                <div class="form-2">
+                    <!--Start of form 2-->
+                    <label for="start-date">from</label>
+                    @Html.TextBox("date-start", null, new { @type = "date", @class = "form-actions" })
+                    <label for="end-date">to</label>
+                    @Html.TextBox("date-end", null, new { @type = "date", @class = "form-actions" })
+                </div><!--End of form 2-->
+            </div>
+            <!--End of Container 2-->
+
+        </div>
+        <div id="container-3">
+            <!--End of Container 3-->
+            <div><button type="button" id="print-data" class="button-form">Print Data</button></div>
+            <div><button type="button" id="reset-data" class="button-form">Reset</button></div>
+        </div>
+        <div id="search-area">
+            <!--End of search area-->
+            <input type="text" name="" id="" placeholder="Search Anything" class="form-actions">
+        </div>
+    </div>
+
+    <div id="container-4">
+        <div id="table-1">
+            <table id="main-table">
+                <thead class="header-table">
+                    <tr class="tr-1">
+                        <th class="table-id">ID</th>
+                        <th>Role</th>
+                        <th>Username</th>
+                        <th>Activity</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>HR</td>
+                        <td>Attendance Log in</td>
+                        <td>11/12/23 7:20</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Attendance Log in</td>
+                        <td>11/12/23 7:21</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>MJ</td>
+                        <td>Cashier</td>
+                        <td>Attendance Log in</td>
+                        <td>11/12/23 7:21</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Mark</td>
+                        <td>HR</td>
+                        <td>Added an Employee</td>
+                        <td>11/12/23 8:04</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:05</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:07</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:07</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:08</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:10</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>PeterParker</td>
+                        <td>Cashier</td>
+                        <td>Sold a Product</td>
+                        <td>11/12/23 9:10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

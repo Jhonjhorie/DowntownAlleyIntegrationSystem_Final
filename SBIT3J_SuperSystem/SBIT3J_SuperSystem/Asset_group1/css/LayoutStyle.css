@@ -1,0 +1,218 @@
+﻿/*
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+    GROUP 1 MAIN LAYOUT CSS FILE
+
+    wag nyo po gagalawin :>
+
+*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+@font-face {
+    font-family: azonix;
+    src: url(fonts/Azonix-1VB0.otf);
+}
+
+.main {
+    background-color: antiquewhite;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 20% 80%; 
+    grid-template-rows: 40px 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    "nav nav"
+    "sidebar main"; 
+}
+
+nav {
+    background-color: rgba(87, 27, 39, 1);
+    grid-area: nav;
+    
+}
+
+.navbar {
+    padding: 0;
+    margin: 0;
+}
+
+.brand {
+    height: 100%;
+    width: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: azonix;
+    color: white;
+
+}
+
+#sidebar {
+    background-color: rgba(87, 27, 39, 1);
+    grid-area: sidebar;
+}
+
+main {
+    grid-area: main;
+}
+
+.page {
+    background-color: rgba(236, 242, 249, 1);
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;    
+}
+
+.profile {
+    height: 230px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 5px;
+    background-color: rgba(87, 27, 39, 1);
+}
+
+.profile h4 {
+    color: rgba(244, 243, 243, 1);
+    font-family: "Poppins", sans-serif;
+    font-weight: 10;
+}
+
+.profile-photo {
+    position: relative;
+    margin-top: 10px;
+    
+    background-color: azure;
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+}
+
+li{
+    text-align: center;
+    height: 40px;
+    border: 1px rgba(255, 237, 79, 1) solid;
+}
+/*to delete*/
+#navlist a { 
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(87, 27, 39, 1);
+    padding-left: 30px;
+    position: relative;
+    height: 100%;
+
+}
+
+#navlist .item {
+    text-decoration: none;
+    display: flex;
+    justify-content: flex;
+    background-color: rgba(87, 27, 39, 1);
+    position: relative;
+    height: 100%;
+    text-align: center;
+    height: 40px;
+    border: 1px rgba(255, 237, 79, 1) solid;
+
+}
+
+
+#navlist .item a {
+    text-decoration: none;
+    color: rgba(244, 243, 243, 1);
+    flex: 1;
+}
+
+#navlist span {
+    background-color: transparent;
+    justify-content: space-between;
+    width: 150px;
+    margin-left: -8px;
+    font-family: "Poppins", sans-serif;
+    
+}
+
+
+#navlist i {
+    color: rgba(255, 237, 79, 1);
+    font-size: 25px;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 10px;
+
+}
+
+
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+}
+
+.item a .dropdown {
+    position: relative;
+    right: 0;
+}
+
+
+
+#navlist .subitem {
+    display: none;
+    padding-left: 20px; /* Adjust the indentation as needed */
+}
+
+#navlist .item:hover .subitem {
+    
+    display: block;
+}
+
+#navlist .item:hover + .subitem {
+    display: block;
+    
+}
+
+
+#navlist .subitem a {
+    display: block;
+    /* Style your subitem links here */
+    background-color: rgba(87, 27, 39, 1);
+    border: 1px rgba(255, 237, 79, 1) solid;
+    color: white;
+    width: 170px;
+    z-index: 99;
+    height: 30px;
+}
+
+#navlist .subitem span {
+    background-color: transparent;
+    margin-left: -60px;
+}
+
+.title {
+    padding-left: 50px;
+    align-self: flex-start;
+}

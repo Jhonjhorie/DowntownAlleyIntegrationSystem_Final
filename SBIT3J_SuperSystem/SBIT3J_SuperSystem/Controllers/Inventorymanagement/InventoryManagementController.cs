@@ -43,5 +43,17 @@ namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 
             return View(objMultipleModel);
         }
+
+
+
+        [HttpGet]
+        public JsonResult getItemUnitPrice(int ProductID)
+        {
+            decimal price = (decimal)objSBIT3JEntities.Products.Single(model => model.ProductID == ProductID).Price;
+            return Json(price, JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }

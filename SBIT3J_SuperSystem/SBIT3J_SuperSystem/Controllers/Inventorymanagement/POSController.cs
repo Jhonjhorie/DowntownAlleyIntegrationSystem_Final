@@ -34,8 +34,6 @@ namespace SBIT3J_SuperSystem.Controllers.Inventorymanagement
 
 
 
-
-
         [HttpGet]
         public JsonResult getItemUnitPrice(int ProductID)
         {
